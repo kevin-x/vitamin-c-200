@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>비타민C 200회 기념 걷기 이벤트</title>
+<style>
+  :root{
+    --bg:#f4f7f2;
+    --card:#ffffff;
+    --line:#dbe8dc;
+    --text:#163322;
+    --sub:#58705f;
+    --green:#237a4a;
+    --green2:#39a95e;
+    --green3:#e8f6eb;
+    --mint:#eef9f1;
+    --gold:#d8a32d;
+    --silver:#9da9b3;
+    --bronze:#b97441;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:linear-gradient(180deg,#f7fbf7 0%,#eef5ef 100%);color:var(--text);font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+  body{padding:18px}
+  .wrap{max-width:960px;margin:0 auto}
+  .toolbar{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:0 8px 24px rgba(17,50,26,.06);margin-bottom:16px}
+  .toolbar-top{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .toolbar strong{font-size:18px;margin-right:auto}
+  .btn{border:0;border-radius:10px;padding:10px 14px;background:var(--green);color:#fff;font-weight:700;cursor:pointer}
+  .btn.secondary{background:#eef5ef;color:var(--green);border:1px solid #cfe0d2}
+  .help{font-size:13px;color:var(--sub);margin:10px 0 0;line-height:1.55}
+
+  .editor{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #e8eeea}
+  .editor.show{display:block}
+  .field-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-size:12px;font-weight:700;color:var(--sub)}
+  .field input,.field select{padding:8px 10px;border:1px solid #cadacc;border-radius:8px;font-size:14px;min-width:120px}
+  .edit-table{width:100%;border-collapse:collapse;background:#fcfffd;border:1px solid #e2ece3;border-radius:12px;overflow:hidden}
+  .edit-table th,.edit-table td{padding:8px;border-bottom:1px solid #e8efea;text-align:left;font-size:13px}
+  .edit-table th{background:#f0f8f1}
+  .edit-table tr:last-child td{border-bottom:0}
+  .edit-table input,.edit-table select{width:100%;padding:7px 8px;border:1px solid #cedbcf;border-radius:6px;font-size:13px}
+
+  .poster{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 14px 36px rgba(17,50,26,.08)}
+  .hero{padding:34px 28px 24px;background:
+      radial-gradient(circle at top left, #fbfff8 0, #fbfff8 32%, transparent 33%),
+      radial-gradient(circle at top right, #fbfff8 0, #fbfff8 32%, transparent 33%),
+      linear-gradient(180deg,#eff9f1 0%,#e4f3e8 100%);
+    border-bottom:1px solid #d8e8da;
+    text-align:center;position:relative}
+  .leaf{position:absolute;font-size:22px;opacity:.65}
+  .leaf.l1{left:28px;top:18px}.leaf.l2{right:30px;top:22px}.leaf.l3{left:90px;bottom:18px}.leaf.l4{right:85px;bottom:18px}
+  .title{font-size:44px;line-height:1.12;font-weight:900;letter-spacing:-2px;color:#175636;margin:0}
+  .title small{display:block;color:#22804b;font-size:32px;margin-top:6px}
+  .badge{display:inline-block;margin-top:18px;padding:10px 18px;border-radius:999px;background:#1f6e45;color:#fff;font-size:28px;font-weight:900;letter-spacing:-1px}
+  .date{display:inline-block;margin-top:12px;padding:10px 18px;border-radius:999px;background:#dff3e4;color:#175636;font-size:22px;font-weight:800}
+  .meta{margin-top:14px;font-size:22px;font-weight:800;color:#284938;letter-spacing:-.6px}
+  .submeta{margin-top:8px;font-size:17px;color:#4f6958;line-height:1.55}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:22px 24px}
+  .stat{background:var(--mint);border:1px solid #d5e7d8;border-radius:20px;padding:20px 18px;text-align:center}
+  .stat .icon{font-size:34px;line-height:1;margin-bottom:10px}
+  .stat .label{font-size:19px;color:#476553;font-weight:800}
+  .stat .value{font-size:46px;font-weight:900;letter-spacing:-1.5px;color:#185736;margin-top:6px}
+  .stat .value small{font-size:27px}
+  .stat.leader{background:linear-gradient(180deg,#effaf1 0%,#e4f5e9 100%)}
+  .stat.leader .name{font-size:32px;font-weight:900;color:#185736;margin-top:2px}
+
+  .section{padding:4px 24px 0}
+  .section-title{display:flex;justify-content:center;align-items:center;gap:10px;margin:6px 0 18px}
+  .section-title span{background:linear-gradient(90deg,#1f7147,#238a53);color:#fff;padding:12px 24px;border-radius:999px;font-size:31px;font-weight:900;letter-spacing:-1px}
+  .note{text-align:center;color:#607565;font-size:14px;margin-top:-4px;margin-bottom:12px}
+
+  .rank-list{padding:0 24px 24px}
+  .row{display:grid;grid-template-columns:70px 150px 1fr 160px;gap:16px;align-items:center;padding:12px 6px;border-bottom:1px solid #edf2ee}
+  .row:last-child{border-bottom:0}
+  .rank{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;font-size:21px;font-weight:900;color:#fff;margin:0 auto}
+  .r1{background:var(--gold)} .r2{background:var(--silver)} .r3{background:var(--bronze)}
+  .rX{background:#9fc3a8;color:#1d4d31}
+  .name{font-size:31px;font-weight:900;letter-spacing:-1px;white-space:nowrap}
+  .bar{height:22px;background:#e7eeea;border-radius:999px;overflow:hidden}
+  .fill{height:100%;background:linear-gradient(90deg,var(--green2),var(--green));border-radius:999px}
+  .steps{text-align:right;font-size:32px;font-weight:900;letter-spacing:-1px;white-space:nowrap}
+
+  .apps{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 24px 24px}
+  .app{background:#f7fbf8;border:1px solid #d9e7dc;border-radius:22px;padding:18px 20px;text-align:center}
+  .app h3{margin:0;font-size:26px;letter-spacing:-1px;color:#195b39}
+  .app p{margin:10px 0 0;font-size:20px;line-height:1.6;color:#254534;font-weight:700}
+
+  .footer{padding:8px 24px 28px;text-align:center}
+  .footer-box{border-radius:22px;background:linear-gradient(180deg,#eff9f2 0%,#e2f3e8 100%);padding:22px 18px;border:1px solid #d5e7d8}
+  .footer-main{font-size:40px;font-weight:900;letter-spacing:-1.5px;color:#165735}
+  .footer-sub{font-size:22px;color:#45624f;font-weight:700;margin-top:8px;line-height:1.5}
+
+  @media (max-width:900px){
+    .title{font-size:34px}.title small{font-size:26px}.badge{font-size:24px}.meta{font-size:19px}.submeta{font-size:15px}
+    .stats{grid-template-columns:1fr}.stat .value{font-size:38px}
+    .row{grid-template-columns:58px 106px 1fr 112px;gap:10px}.name{font-size:24px}.steps{font-size:24px}
+    .apps{grid-template-columns:1fr}
+    .section-title span{font-size:24px}
+    .footer-main{font-size:30px}.footer-sub{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="toolbar">
+    <div class="toolbar-top">
+      <strong>비타민C 200회 · 텍스트 기반 HTML</strong>
+      <button class="btn" id="toggleEdit">데이터 수정</button>
+      <button class="btn secondary" id="downloadHtml">현재 HTML 저장</button>
+    </div>
+    <p class="help">모든 제목·숫자·순위·참가자 목록을 실제 HTML 텍스트로 표시합니다. 이미지 의존도를 줄여 글자 깨짐 문제를 완화한 경량 버전입니다.</p>
+    <div class="editor" id="editor">
+      <div class="field-row">
+        <div class="field"><label>기준일</label><input id="dateInput"></div>
+        <div class="field"><label>상태 문구</label><input id="statusInput" style="min-width:300px"></div>
+        <div class="field"><label>기간 시작</label><input id="startInput"></div>
+        <div class="field"><label>기간 종료</label><input id="endInput"></div>
+      </div>
+      <table class="edit-table">
+        <thead><tr><th>이름</th><th>걸음 수</th><th>앱</th></tr></thead>
+        <tbody id="editRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="poster">
+    <div class="hero">
+      <div class="leaf l1">🍁</div><div class="leaf l2">🍁</div><div class="leaf l3">🍂</div><div class="leaf l4">🍂</div>
+      <h1 class="title">비타민C 200회 기념<small>걷기 이벤트</small></h1>
+      <div class="badge" id="heroBadge">1주차 중간 집계 현황</div><br>
+      <div class="date" id="heroDate">2026. 10. 12 기준</div>
+      <div class="meta" id="heroStatus">4주 챌린지 진행 중 · 현재 1주차 종료 · 20일 남음</div>
+      <div class="submeta" id="heroPeriod">기간: 10월 5일 ~ 11월 1일<br>집계 기준: 안드로이드는 삼성헬스 Together, 아이폰은 StepUp</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="icon">👥</div><div class="label">참가자</div><div class="value" id="statPeople"></div></div>
+      <div class="stat"><div class="icon">👟</div><div class="label">누적 걸음</div><div class="value" id="statSteps"></div></div>
+      <div class="stat leader"><div class="icon">👑</div><div class="label">현재 1위</div><div class="name" id="statLeaderName"></div><div class="value" id="statLeaderSteps" style="font-size:34px"></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span>통합 순위</span></div>
+      <div class="note">※ Kevin은 양쪽 앱에 보이지만 동일 인물로 1명만 반영</div>
+    </div>
+    <div class="rank-list" id="rankList"></div>
+
+    <div class="section">
+      <div class="section-title"><span>앱별 참가자</span></div>
+    </div>
+    <div class="apps">
+      <div class="app">
+        <h3>안드로이드 · 삼성헬스 Together</h3>
+        <p id="androidList"></p>
+      </div>
+      <div class="app">
+        <h3>아이폰 · StepUp</h3>
+        <p id="iphoneList"></p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-box">
+        <div class="footer-main">남은 3주도 함께 걸어요!</div>
+        <div class="footer-sub">매일 한 걸음씩, 200회의 울림을 완성해 봅시다.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script id="initial-data" type="application/json">{
+  "date":"2026. 10. 12",
+  "status":"4주 챌린지 진행 중 · 현재 1주차 종료 · 20일 남음",
+  "start":"10월 5일",
+  "end":"11월 1일",
+  "participants":[
+    {"name":"Kevin","steps":117212,"app":"both"},
+    {"name":"알즈","steps":90224,"app":"android"},
+    {"name":"자스민","steps":83133,"app":"android"},
+    {"name":"써니","steps":80588,"app":"android"},
+    {"name":"그레이스","steps":77070,"app":"android"},
+    {"name":"태형","steps":51660,"app":"iphone"},
+    {"name":"헤이","steps":51190,"app":"iphone"},
+    {"name":"Cool","steps":48160,"app":"android"},
+    {"name":"케이","steps":42487,"app":"android"},
+    {"name":"에스더","steps":39785,"app":"android"},
+    {"name":"엘리오","steps":31215,"app":"android"}
+  ]
+}</script>
+<script>
+(() => {
+  const fmt = new Intl.NumberFormat('ko-KR');
+  const $ = s => document.querySelector(s);
+  let data = JSON.parse($('#initial-data').textContent);
+  const sorted = () => [...data.participants].sort((a,b)=>b.steps-a.steps);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  function render(){
+    const people = sorted();
+    const total = people.reduce((sum,p)=>sum + Number(p.steps||0), 0);
+    const leader = people[0];
+
+    $('#heroDate').textContent = data.date + ' 기준';
+    $('#heroStatus').textContent = data.status;
+    $('#heroPeriod').innerHTML = '기간: ' + data.start + ' ~ ' + data.end + '<br>집계 기준: 안드로이드는 삼성헬스 Together, 아이폰은 StepUp';
+    $('#statPeople').innerHTML = fmt.format(people.length) + '<small>명</small>';
+    $('#statSteps').innerHTML = fmt.format(total) + '<small>보</small>';
+    $('#statLeaderName').textContent = leader.name;
+    $('#statLeaderSteps').innerHTML = fmt.format(leader.steps) + '<small>보</small>';
+
+    $('#rankList').innerHTML = people.map((p,idx)=>{
+      const pct = leader.steps > 0 ? Math.max(2, Math.round((p.steps/leader.steps)*100)) : 0;
+      const cls = idx===0?'r1':idx===1?'r2':idx===2?'r3':'rX';
+      return `
+        <div class="row">
+          <div class="rank ${cls}">${idx+1}</div>
+          <div class="name">${esc(p.name)}</div>
+          <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
+          <div class="steps">${fmt.format(p.steps)}보</div>
+        </div>`;
+    }).join('');
+
+    const android = people.filter(p=>p.app==='android' || p.app==='both').map(p=>p.name);
+    const iphone = people.filter(p=>p.app==='iphone' || p.app==='both').map(p=>p.name);
+    $('#androidList').textContent = android.join(', ');
+    $('#iphoneList').textContent = iphone.join(', ');
+
+    $('#dateInput').value = data.date;
+    $('#statusInput').value = data.status;
+    $('#startInput').value = data.start;
+    $('#endInput').value = data.end;
+    $('#editRows').innerHTML = data.participants.map((p,i)=> `
+      <tr>
+        <td><input data-i="${i}" data-k="name" value="${esc(p.name)}"></td>
+        <td><input type="number" min="0" step="1" data-i="${i}" data-k="steps" value="${p.steps}"></td>
+        <td>
+          <select data-i="${i}" data-k="app">
+            <option value="android" ${p.app==='android'?'selected':''}>Android</option>
+            <option value="iphone" ${p.app==='iphone'?'selected':''}>iPhone</option>
+            <option value="both" ${p.app==='both'?'selected':''}>양쪽</option>
+          </select>
+        </td>
+      </tr>`).join('');
+  }
+
+  $('#toggleEdit').addEventListener('click', ()=> $('#editor').classList.toggle('show'));
+  $('#downloadHtml').addEventListener('click', ()=>{
+    $('#initial-data').textContent = JSON.stringify(data, null, 2).replace(/</g,'\\u003c');
+    const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '비타민C_걷기_텍스트기반_' + data.date.replace(/\D/g,'') + '.html';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  $('#dateInput').addEventListener('input', e=>{data.date=e.target.value; render();});
+  $('#statusInput').addEventListener('input', e=>{data.status=e.target.value; render();});
+  $('#startInput').addEventListener('input', e=>{data.start=e.target.value; render();});
+  $('#endInput').addEventListener('input', e=>{data.end=e.target.value; render();});
+  $('#editRows').addEventListener('input', e=>{
+    const i = e.target.dataset.i; const k = e.target.dataset.k;
+    if(i===undefined || !k) return;
+    data.participants[i][k] = k==='steps' ? Math.max(0, Number(e.target.value)||0) : e.target.value;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
