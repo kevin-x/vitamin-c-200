@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>비타민C 200회 기념 걷기 이벤트</title>
+<title>비타민C 200회 · 울림과 떨림</title>
 <style>
   :root{
     --bg:#FFF6E9;
@@ -15,17 +15,14 @@
     --accent2:#B5603D;
     --mint:#FFFCF6;
     --dark:#2B1B12;
-    --gold:#FFD93D;
-    --silver:#D9C2A0;
-    --bronze:#B5603D;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:linear-gradient(180deg,#FFF9EF 0%,#FFF1D8 100%);color:var(--text);font-family:"Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif}
   body{padding:18px}
-  .wrap{max-width:960px;margin:0 auto}
+  .wrap{max-width:720px;margin:0 auto}
 
   .poster{background:var(--card);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 14px 36px rgba(90,60,20,.1)}
-  .hero{padding:34px 28px 24px;background:
+  .hero{padding:40px 28px 30px;background:
       radial-gradient(circle at top left, #FFFDF8 0, #FFFDF8 32%, transparent 33%),
       radial-gradient(circle at top right, #FFFDF8 0, #FFFDF8 32%, transparent 33%),
       linear-gradient(180deg,#FFF8E7 0%,#FFEFCE 100%);
@@ -33,55 +30,38 @@
     text-align:center;position:relative}
   .leaf{position:absolute;font-size:22px;opacity:.65}
   .leaf.l1{left:28px;top:18px}.leaf.l2{right:30px;top:22px}.leaf.l3{left:90px;bottom:18px}.leaf.l4{right:85px;bottom:18px}
-  .title{font-size:44px;line-height:1.12;font-weight:900;letter-spacing:-2px;color:var(--dark);margin:0}
-  .title small{display:block;color:var(--accent2);font-size:32px;margin-top:6px}
-  .badge{display:inline-block;margin-top:18px;padding:10px 18px;border-radius:999px;background:var(--dark);color:var(--accent);font-size:28px;font-weight:900;letter-spacing:-1px}
-  .date{display:inline-block;margin-top:12px;padding:10px 18px;border-radius:999px;background:#FFF1C6;color:#6B4F1D;font-size:22px;font-weight:800}
-  .meta{margin-top:14px;font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.6px}
-  .submeta{margin-top:8px;font-size:17px;color:var(--sub);line-height:1.55}
+  .brand{font-size:20px;font-weight:800;letter-spacing:-.5px;color:var(--accent2)}
+  .title{font-size:40px;line-height:1.2;font-weight:900;letter-spacing:-1.5px;color:var(--dark);margin:12px 0 0}
+  .badge{display:inline-block;margin-top:16px;padding:10px 20px;border-radius:999px;background:var(--dark);color:var(--accent);font-size:22px;font-weight:900;letter-spacing:-.5px}
 
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:22px 24px}
-  .stat{background:var(--mint);border:1px solid var(--line);border-radius:20px;padding:20px 18px;text-align:center}
-  .stat .icon{font-size:34px;line-height:1;margin-bottom:10px}
-  .stat .label{font-size:19px;color:var(--sub);font-weight:800}
-  .stat .value{font-size:46px;font-weight:900;letter-spacing:-1.5px;color:var(--dark);margin-top:6px}
-  .stat .value small{font-size:27px}
-  .stat.leader{background:linear-gradient(180deg,#FFFBEB 0%,#FFF1C6 100%)}
-  .stat.leader .name{font-size:32px;font-weight:900;color:var(--dark);margin-top:2px}
+  .story{padding:32px 28px 8px}
+  .story-title{text-align:center;font-size:19px;font-weight:800;color:var(--accent2);letter-spacing:-.3px;margin-bottom:18px}
+  .story p{font-size:18px;line-height:1.85;color:var(--text);margin:0 0 20px;text-align:center}
+  .story p:last-child{margin-bottom:0}
+  .story strong{color:var(--accent2)}
 
-  .section{padding:4px 24px 0}
-  .section-title{display:flex;justify-content:center;align-items:center;gap:10px;margin:6px 0 18px}
-  .section-title span{background:linear-gradient(90deg,#FFD93D,#F0C030);color:var(--dark);padding:12px 24px;border-radius:999px;font-size:31px;font-weight:900;letter-spacing:-1px}
-  .note{text-align:center;color:var(--sub);font-size:14px;margin-top:-4px;margin-bottom:12px}
+  .section-title{display:flex;justify-content:center;align-items:center;gap:10px;margin:30px 0 18px;padding:0 24px}
+  .section-title span{background:linear-gradient(90deg,#FFD93D,#F0C030);color:var(--dark);padding:12px 24px;border-radius:999px;font-size:22px;font-weight:900;letter-spacing:-.5px}
 
-  .rank-list{padding:0 24px 24px}
-  .row{display:grid;grid-template-columns:70px 150px 1fr 160px;gap:16px;align-items:center;padding:12px 6px;border-bottom:1px solid #F5E8D0}
-  .row:last-child{border-bottom:0}
-  .rank{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;font-size:21px;font-weight:900;color:var(--dark);margin:0 auto}
-  .r1{background:var(--gold)} .r2{background:var(--silver)} .r3{background:var(--bronze);color:#fff}
-  .rX{background:#F0E0C3;color:#6B4F1D}
-  .name{font-size:31px;font-weight:900;letter-spacing:-1px;white-space:nowrap}
-  .bar{height:22px;background:#F5E8D0;border-radius:999px;overflow:hidden}
-  .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px}
-  .steps{text-align:right;font-size:32px;font-weight:900;letter-spacing:-1px;white-space:nowrap}
-
-  .apps{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 24px 24px}
-  .app{background:var(--mint);border:1px solid var(--line);border-radius:22px;padding:18px 20px;text-align:center}
-  .app h3{margin:0;font-size:26px;letter-spacing:-1px;color:var(--dark)}
-  .app p{margin:10px 0 0;font-size:20px;line-height:1.6;color:var(--sub);font-weight:700}
+  .links{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 24px 28px}
+  .link-card{display:block;background:var(--mint);border:1px solid var(--line);border-radius:22px;padding:24px 18px;text-align:center;text-decoration:none;color:var(--text);transition:transform .15s, box-shadow .15s}
+  .link-card:active{transform:scale(.98)}
+  .link-card .icon{font-size:40px;line-height:1}
+  .link-card h3{margin:12px 0 0;font-size:21px;font-weight:900;letter-spacing:-.5px;color:var(--dark)}
+  .link-card p{margin:8px 0 0;font-size:15px;line-height:1.5;color:var(--sub);font-weight:700}
+  .link-card .go{display:inline-block;margin-top:14px;font-size:14px;font-weight:800;color:var(--accent2)}
 
   .footer{padding:8px 24px 28px;text-align:center}
   .footer-box{border-radius:22px;background:linear-gradient(180deg,#2B1B12 0%,#3D2817 100%);padding:22px 18px;border:1px solid #2B1B12}
-  .footer-main{font-size:40px;font-weight:900;letter-spacing:-1.5px;color:var(--accent)}
-  .footer-sub{font-size:22px;color:#EDDFC9;font-weight:700;margin-top:8px;line-height:1.5}
+  .footer-main{font-size:26px;font-weight:900;letter-spacing:-.5px;color:var(--accent)}
+  .footer-sub{font-size:16px;color:#EDDFC9;font-weight:700;margin-top:8px;line-height:1.5}
 
-  @media (max-width:900px){
-    .title{font-size:34px}.title small{font-size:26px}.badge{font-size:24px}.meta{font-size:19px}.submeta{font-size:15px}
-    .stats{grid-template-columns:1fr}.stat .value{font-size:38px}
-    .row{grid-template-columns:58px 106px 1fr 112px;gap:10px}.name{font-size:24px}.steps{font-size:24px}
-    .apps{grid-template-columns:1fr}
-    .section-title span{font-size:24px}
-    .footer-main{font-size:30px}.footer-sub{font-size:18px}
+  @media (max-width:600px){
+    .title{font-size:32px}.badge{font-size:19px}
+    .story p{font-size:16px}
+    .links{grid-template-columns:1fr}
+    .section-title span{font-size:19px}
+    .footer-main{font-size:22px}.footer-sub{font-size:15px}
   }
 </style>
 </head>
@@ -90,108 +70,42 @@
   <section class="poster">
     <div class="hero">
       <div class="leaf l1">🍁</div><div class="leaf l2">🍁</div><div class="leaf l3">🍂</div><div class="leaf l4">🍂</div>
-      <h1 class="title">비타민C 200회 기념<small>걷기 이벤트</small></h1>
-      <div class="badge" id="heroBadge">2주차 중간 집계 현황</div><br>
-      <div class="date" id="heroDate">2026. 10. 15 기준</div>
-      <div class="meta" id="heroStatus">4주 챌린지 진행 중 · 현재 2주차 진행 중 · 17일 남음</div>
-      <div class="submeta" id="heroPeriod">기간: 10월 5일 ~ 11월 1일<br>집계 기준: 안드로이드는 삼성헬스 Together, 아이폰은 StepUp</div>
+      <div class="brand">비타민C</div>
+      <h1 class="title">11월, 200번째<br>수요일을 향해</h1>
+      <div class="badge">200회 기념 · 울림과 떨림</div>
     </div>
 
-    <div class="stats">
-      <div class="stat"><div class="icon">👥</div><div class="label">참가자</div><div class="value" id="statPeople"></div></div>
-      <div class="stat"><div class="icon">👟</div><div class="label">누적 걸음</div><div class="value" id="statSteps"></div></div>
-      <div class="stat leader"><div class="icon">👑</div><div class="label">현재 1위</div><div class="name" id="statLeaderName"></div><div class="value" id="statLeaderSteps" style="font-size:34px"></div></div>
+    <div class="story">
+      <div class="story-title">작은 타이틀, '울림과 떨림'</div>
+      <p>매주 수요일 저녁, 우리는 모였습니다.<br>그렇게 쌓인 시간이 11월, <strong>200번째</strong>를 맞습니다.</p>
+      <p>처음 모임에 들어와 마주 앉았던 그날의 떨림,<br>온라인 화면 너머로 떨려오던 서로의 목소리.</p>
+      <p>그 떨림들은 어느새 우리 가슴속에<br><strong>울림</strong>으로 차곡차곡 쌓여왔습니다.</p>
+      <p>그 울림을 안고, 지금 두 가지 이야기를<br>함께 써 내려가고 있습니다.</p>
     </div>
 
-    <div class="section">
-      <div class="section-title"><span>통합 순위</span></div>
-      <div class="note">※ Kevin은 양쪽 앱에 보이지만 동일 인물로 1명만 반영</div>
-    </div>
-    <div class="rank-list" id="rankList"></div>
-
-    <div class="section">
-      <div class="section-title"><span>앱별 참가자</span></div>
-    </div>
-    <div class="apps">
-      <div class="app">
-        <h3>안드로이드 · 삼성헬스 Together</h3>
-        <p id="androidList"></p>
-      </div>
-      <div class="app">
-        <h3>아이폰 · StepUp</h3>
-        <p id="iphoneList"></p>
-      </div>
+    <div class="section-title"><span>지금 진행 중인 이야기</span></div>
+    <div class="links">
+      <a class="link-card" href="walking.html">
+        <div class="icon">🚶</div>
+        <h3>걷기 이벤트</h3>
+        <p>매일 한 걸음씩,<br>200회의 울림을 함께 채워가요</p>
+        <span class="go">현황 보기 →</span>
+      </a>
+      <a class="link-card" href="trip.html">
+        <div class="icon">🧡</div>
+        <h3>1박2일 여행</h3>
+        <p>떨림에서 울림이 된 우리,<br>함께 떠나는 특별한 하루</p>
+        <span class="go">일정 보기 →</span>
+      </a>
     </div>
 
     <div class="footer">
       <div class="footer-box">
-        <div class="footer-main">남은 17일도 함께 걸어요!</div>
-        <div class="footer-sub">매일 한 걸음씩, 200회의 울림을 완성해 봅시다.</div>
+        <div class="footer-main">함께 걷고, 함께 떠나요</div>
+        <div class="footer-sub">200회까지, 우리의 울림은 계속됩니다.</div>
       </div>
     </div>
   </section>
 </div>
-
-<script id="initial-data" type="application/json">{
-  "date":"2026. 10. 15",
-  "status":"4주 챌린지 진행 중 · 현재 2주차 진행 중 · 17일 남음",
-  "start":"10월 5일",
-  "end":"11월 1일",
-  "participants":[
-    {"name":"Kevin","steps":161482,"app":"both"},
-    {"name":"알즈","steps":140295,"app":"android"},
-    {"name":"자스민","steps":134372,"app":"android"},
-    {"name":"써니","steps":119319,"app":"android"},
-    {"name":"그레이스","steps":129951,"app":"android"},
-    {"name":"태형","steps":81145,"app":"iphone"},
-    {"name":"헤이","steps":87689,"app":"iphone"},
-    {"name":"Cool","steps":72282,"app":"android"},
-    {"name":"케이","steps":63426,"app":"android"},
-    {"name":"에스더","steps":80867,"app":"android"},
-    {"name":"엘리오","steps":38374,"app":"android"}
-  ]
-}</script>
-<script>
-(() => {
-  const fmt = new Intl.NumberFormat('ko-KR');
-  const $ = s => document.querySelector(s);
-  let data = JSON.parse($('#initial-data').textContent);
-  const sorted = () => [...data.participants].sort((a,b)=>b.steps-a.steps);
-  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-  function render(){
-    const people = sorted();
-    const total = people.reduce((sum,p)=>sum + Number(p.steps||0), 0);
-    const leader = people[0];
-
-    $('#heroDate').textContent = data.date + ' 기준';
-    $('#heroStatus').textContent = data.status;
-    $('#heroPeriod').innerHTML = '기간: ' + data.start + ' ~ ' + data.end + '<br>집계 기준: 안드로이드는 삼성헬스 Together, 아이폰은 StepUp';
-    $('#statPeople').innerHTML = fmt.format(people.length) + '<small>명</small>';
-    $('#statSteps').innerHTML = fmt.format(total) + '<small>보</small>';
-    $('#statLeaderName').textContent = leader.name;
-    $('#statLeaderSteps').innerHTML = fmt.format(leader.steps) + '<small>보</small>';
-
-    $('#rankList').innerHTML = people.map((p,idx)=>{
-      const pct = leader.steps > 0 ? Math.max(2, Math.round((p.steps/leader.steps)*100)) : 0;
-      const cls = idx===0?'r1':idx===1?'r2':idx===2?'r3':'rX';
-      return `
-        <div class="row">
-          <div class="rank ${cls}">${idx+1}</div>
-          <div class="name">${esc(p.name)}</div>
-          <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
-          <div class="steps">${fmt.format(p.steps)}보</div>
-        </div>`;
-    }).join('');
-
-    const android = people.filter(p=>p.app==='android' || p.app==='both').map(p=>p.name);
-    const iphone = people.filter(p=>p.app==='iphone' || p.app==='both').map(p=>p.name);
-    $('#androidList').textContent = android.join(', ');
-    $('#iphoneList').textContent = iphone.join(', ');
-  }
-
-  render();
-})();
-</script>
 </body>
 </html>
