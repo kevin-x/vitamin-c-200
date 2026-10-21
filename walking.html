@@ -42,6 +42,7 @@
   .date{display:inline-block;margin-top:12px;padding:10px 18px;border-radius:999px;background:#FFF1C6;color:#6B4F1D;font-size:22px;font-weight:800}
   .meta{margin-top:14px;font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.6px}
   .submeta{margin-top:8px;font-size:24px;font-weight:800;color:var(--sub);line-height:1.5}
+  .updated{margin-top:8px;font-size:14px;font-weight:700;color:var(--sub);opacity:.8}
 
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:22px 24px}
   .stat{background:var(--mint);border:1px solid var(--line);border-radius:20px;padding:20px 18px;text-align:center}
@@ -63,6 +64,7 @@
   .rank{display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;font-size:21px;font-weight:900;color:var(--dark);margin:0 auto}
   .r1{background:var(--gold)} .r2{background:var(--silver)} .r3{background:var(--bronze);color:#fff}
   .rX{background:#F0E0C3;color:#6B4F1D}
+  .rHost{background:var(--dark);color:var(--accent);font-size:20px}
   .name{font-size:31px;font-weight:900;letter-spacing:-1px;white-space:nowrap}
   .bar{height:22px;background:#F5E8D0;border-radius:999px;overflow:hidden}
   .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px}
@@ -74,7 +76,7 @@
   .footer-sub{font-size:22px;color:#EDDFC9;font-weight:700;margin-top:8px;line-height:1.5}
 
   @media (max-width:900px){
-    .title{font-size:34px}.title small{font-size:26px}.badge{font-size:24px}.meta{font-size:19px}.submeta{font-size:19px}
+    .title{font-size:34px}.title small{font-size:26px}.badge{font-size:24px}.meta{font-size:19px}.submeta{font-size:19px}.updated{font-size:12px}
     .stats{grid-template-columns:1fr}.stat .value{font-size:38px}
     .row{grid-template-columns:58px 106px 1fr 112px;gap:10px}.name{font-size:24px}.steps{font-size:24px}
     .section-title span{font-size:24px}
@@ -93,7 +95,8 @@
       <div class="badge" id="heroBadge">2주차 중간 집계 현황</div><br>
       <div class="date" id="heroDate">2026. 10. 15 기준</div>
       <div class="meta" id="heroStatus">4주 챌린지 진행 중 · 현재 2주차 진행 중 · 17일 남음</div>
-      <div class="submeta" id="heroPeriod">기간: 10월 5일 ~ 11월 1일<br>집계 기준: 안드로이드는 삼성헬스 Together, 아이폰은 StepUp</div>
+      <div class="submeta" id="heroPeriod">기간: 10월 5일 ~ 11월 1일</div>
+      <div class="updated" id="dataUpdated"></div>
     </div>
 
     <div class="stats">
@@ -124,18 +127,19 @@
   "start":"10월 5일",
   "end":"11월 1일",
   "participants":[
-    {"name":"Kevin","steps":218035,"app":"both"},
-    {"name":"알즈","steps":166268,"app":"android"},
-    {"name":"자스민","steps":173527,"app":"android"},
-    {"name":"써니","steps":147224,"app":"android"},
-    {"name":"그레이스","steps":156350,"app":"android"},
-    {"name":"태형","steps":110400,"app":"iphone"},
-    {"name":"헤이","steps":112200,"app":"iphone"},
-    {"name":"Cool","steps":98251,"app":"android"},
-    {"name":"케이","steps":94621,"app":"android"},
-    {"name":"에스더","steps":119908,"app":"android"},
-    {"name":"엘리오","steps":56933,"app":"android"}
-  ]
+    {"name":"Kevin","steps":261108,"app":"both"},
+    {"name":"알즈","steps":192814,"app":"android"},
+    {"name":"자스민","steps":191926,"app":"android"},
+    {"name":"써니","steps":161844,"app":"android"},
+    {"name":"그레이스","steps":186447,"app":"android"},
+    {"name":"태형","steps":129600,"app":"iphone"},
+    {"name":"헤이","steps":139100,"app":"iphone"},
+    {"name":"Cool","steps":113750,"app":"android"},
+    {"name":"케이","steps":109240,"app":"android"},
+    {"name":"에스더","steps":143027,"app":"android"},
+    {"name":"엘리오","steps":65944,"app":"android"}
+  ],
+  "dataUpdatedAt":"10월 21일 오후 3시"
 }</script>
 <script>
 (() => {
@@ -184,17 +188,23 @@
     $('#heroStatus').textContent = ch.statusText;
     $('#footerMain').textContent = ch.footerMain;
     $('#heroPeriod').innerHTML = '기간: ' + data.start + ' ~ ' + data.end;
+    $('#dataUpdated').textContent = data.dataUpdatedAt ? ('⏱ 걸음 데이터 업데이트: ' + data.dataUpdatedAt + ' 기준') : '';
     $('#statPeople').innerHTML = fmt.format(people.length) + '<small>명</small>';
     $('#statSteps').innerHTML = fmt.format(total) + '<small>보</small>';
     $('#statLeaderName').textContent = displayLeader.name;
     $('#statLeaderSteps').innerHTML = fmt.format(displayLeader.steps) + '<small>보</small>';
 
-    $('#rankList').innerHTML = people.map((p,idx)=>{
+    const others = people.filter(p => p.name !== 'Kevin');
+
+    $('#rankList').innerHTML = people.map((p)=>{
       const pct = maxSteps > 0 ? Math.max(2, Math.round((p.steps/maxSteps)*100)) : 0;
-      const cls = idx===0?'r1':idx===1?'r2':idx===2?'r3':'rX';
+      const isKevin = p.name === 'Kevin';
+      const rankIdx = isKevin ? -1 : others.indexOf(p);
+      const cls = isKevin ? 'rHost' : (rankIdx===0?'r1':rankIdx===1?'r2':rankIdx===2?'r3':'rX');
+      const rankLabel = isKevin ? '👑' : (rankIdx+1);
       return `
         <div class="row">
-          <div class="rank ${cls}">${idx+1}</div>
+          <div class="rank ${cls}">${rankLabel}</div>
           <div class="name">${esc(p.name)}</div>
           <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
           <div class="steps">${fmt.format(p.steps)}보</div>
