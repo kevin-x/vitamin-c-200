@@ -44,7 +44,7 @@
   .section-title{display:flex;justify-content:center;align-items:center;gap:10px;margin:30px 0 18px;padding:0 24px}
   .section-title span{background:linear-gradient(90deg,#FFD93D,#F0C030);color:var(--dark);padding:12px 24px;border-radius:999px;font-size:22px;font-weight:900;letter-spacing:-.5px}
 
-  .links{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 24px 28px}
+  .links{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 24px 28px}
   .link-card{display:block;background:var(--mint);border:1px solid var(--line);border-radius:22px;padding:24px 18px;text-align:center;text-decoration:none;color:var(--text);transition:transform .15s, box-shadow .15s}
   .link-card:active{transform:scale(.98)}
   .link-card .icon{font-size:40px;line-height:1}
@@ -52,7 +52,7 @@
   .link-card p{margin:8px 0 0;font-size:15px;line-height:1.5;color:var(--sub);font-weight:700}
   .link-card .go{display:inline-block;margin-top:14px;font-size:14px;font-weight:800;color:var(--accent2)}
 
-  .teasers{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:0 24px 28px}
+  .teasers{display:grid;grid-template-columns:1fr;gap:16px;padding:0 24px 28px}
   .teaser{padding:24px 18px;border-radius:22px;background:linear-gradient(135deg, rgba(43,27,18,.05), rgba(181,96,61,.09));border:1.5px dashed var(--accent2);text-align:center}
   .teaser .tag{display:inline-block;padding:6px 14px;border-radius:999px;background:var(--dark);color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.5px}
   .teaser .icon{font-size:36px;margin-top:14px}
@@ -106,6 +106,12 @@
         <p>떨림에서 울림이 된 우리,<br>함께 떠나는 특별한 하루</p>
         <span class="go">일정 보기 →</span>
       </a>
+      <a class="link-card" href="manito.html">
+        <div class="icon">🎁</div>
+        <h3>마니또</h3>
+        <p>두근두근, 나의 마니또를<br>확인해보세요</p>
+        <span class="go">마니또 확인하기 →</span>
+      </a>
     </div>
 
     <div class="teasers">
@@ -114,12 +120,6 @@
         <div class="icon">🎬</div>
         <h3>곧, 영상으로도 만나요</h3>
         <p>200회의 울림을 담은 영상을<br>준비하고 있습니다</p>
-      </div>
-      <div class="teaser">
-        <span class="tag">COMING SOON</span>
-        <div class="icon">🎁</div>
-        <h3>두근두근, 마니또</h3>
-        <p>서로에게 전하는 작은 마음,<br>마니또 이벤트도 준비 중입니다</p>
       </div>
     </div>
 
