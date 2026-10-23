@@ -133,7 +133,7 @@
     {"name":"써니","steps":176976,"app":"android"},
     {"name":"그레이스","steps":202122,"app":"android"},
     {"name":"태형","steps":140000,"app":"iphone"},
-    {"name":"헤이","steps":149000,"app":"iphone"},
+    {"name":"헤이","steps":149000,"app":"iphone","hidden":true},
     {"name":"Cool","steps":125455,"app":"android"},
     {"name":"케이","steps":113314,"app":"android"},
     {"name":"에스더","steps":163469,"app":"android"},
@@ -146,7 +146,7 @@
   const fmt = new Intl.NumberFormat('ko-KR');
   const $ = s => document.querySelector(s);
   let data = JSON.parse($('#initial-data').textContent);
-  const sorted = () => [...data.participants].sort((a,b)=>b.steps-a.steps);
+  const sorted = () => data.participants.filter(p=>!p.hidden).sort((a,b)=>b.steps-a.steps);
   const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   function formatDate(d){
