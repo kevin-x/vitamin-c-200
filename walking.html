@@ -179,7 +179,7 @@
 
   function render(){
     const people = sorted();
-    const total = people.reduce((sum,p)=>sum + Number(p.steps||0), 0);
+    const total = data.participants.reduce((sum,p)=>sum + Number(p.steps||0), 0);
     const maxSteps = people[0].steps;
     const displayLeader = people.find(p => p.name !== 'Kevin') || people[0];
     const ch = challengeStatus();
